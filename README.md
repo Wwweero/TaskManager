@@ -19,7 +19,7 @@ A Python CLI application for task management.
 
 ```bash
 git clone https://github.com/Wwweero/TaskManager.git
-cd task-manager
+cd TaskManager
 ```
 
 ### Run the Script:
