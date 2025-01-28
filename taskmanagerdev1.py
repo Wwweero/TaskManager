@@ -70,15 +70,22 @@ class TaskManager:
                 print(f"ID: {task['id']}, Title: {task['title']}, Completed: {task['completed']}, Priority: {task['priority']}, Due Date: {task['due_date']}, Category: {task['category']}")
 
     @log_operation
-    def mark_task_completed(self, task_id):
+    def mark_task_completed(self):
         # function to mark a task as completed by using its ID
+        print("\n---All Tasks---")
         for task in self.tasks:
-            if task["id"] == task_id:
-                task["completed"] = True
-                self.save_tasks()
-                print("Task marked as completed.")
-                return
-        print("Task not found.")
+            print(f"ID: {task['id']}, Title: {task['title']}, Completed: {task['completed']}" )
+        try:
+            task_id = int(input("Enter task ID to mark as completed: "))
+            for task in self.tasks:
+                if task["id"] == task_id:
+                    task["completed"] = True
+                    self.save_tasks()
+                    print("Task marked as completed.")
+                    return
+            print("Task not found.")
+        except ValueError:
+            print ("Invalid ID. Please enter a numeric value.")
 
     @log_operation
     def delete_task(self, task_id):
@@ -128,11 +135,7 @@ class TaskManager:
                     filter_by = None
                 self.view_tasks(filter_by)
             elif choice == "3":
-                try:
-                    task_id = int(input("Enter task ID to mark it as completed: "))
-                    self.mark_task_completed(task_id)
-                except ValueError:
-                    print("Invalid ID.")
+                self.mark_task_completed()
             elif choice == "4":
                 try:
                     task_id = int(input("Enter task ID you want to delete: "))
